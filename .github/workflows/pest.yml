@@ -38,7 +38,7 @@ jobs:
       run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
 
     - name: Pest Tests
-      run: php bin/pest --colors=always --parallel
+      run: php vendor/bin/pest --colors=always --parallel
 
     - name: Deploy signal to Forge
       run: curl ${{ secrets.FORGE_DEPLOY_URL }}
