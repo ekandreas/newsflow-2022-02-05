@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookmarkResource\Pages;
-use App\Filament\Resources\BookmarkResource\RelationManagers;
-use App\Models\Bookmark;
+use App\Filament\Resources\DomainResource\Pages;
+use App\Filament\Resources\DomainResource\RelationManagers;
+use App\Models\Domain;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
@@ -14,9 +14,9 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 
-class BookmarkResource extends Resource
+class DomainResource extends Resource
 {
-    protected static ?string $model = Bookmark::class;
+    protected static ?string $model = Domain::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -24,10 +24,10 @@ class BookmarkResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('url')->required(),
+                SpatieTagsInput::make('tags'),
                 TextInput::make('name'),
                 TextInput::make('description'),
-                TextInput::make('url'),
-                SpatieTagsInput::make('tags'),
             ]);
     }
 
@@ -39,6 +39,7 @@ class BookmarkResource extends Resource
                 TextColumn::make('url'),
             ])
             ->filters([
+                //
             ]);
     }
 
@@ -52,9 +53,9 @@ class BookmarkResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookmarks::route('/'),
-            'create' => Pages\CreateBookmark::route('/create'),
-            'edit' => Pages\EditBookmark::route('/{record}/edit'),
+            'index' => Pages\ListDomains::route('/'),
+            'create' => Pages\CreateDomain::route('/create'),
+            'edit' => Pages\EditDomain::route('/{record}/edit'),
         ];
     }
 }
