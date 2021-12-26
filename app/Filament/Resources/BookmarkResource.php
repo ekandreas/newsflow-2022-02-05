@@ -12,6 +12,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class BookmarkResource extends Resource
@@ -35,7 +36,9 @@ class BookmarkResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('image')->width(200),
                 TextColumn::make('name'),
+                TextColumn::make('type'),
                 TextColumn::make('url')->url(function($record) {
                     return $record->url;
                 })->openUrlInNewTab(),
