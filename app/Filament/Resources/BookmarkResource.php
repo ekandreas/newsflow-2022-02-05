@@ -21,6 +21,8 @@ use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class BookmarkResource extends Resource
 {
@@ -60,10 +62,11 @@ class BookmarkResource extends Resource
             ])
             ->filters([])->bulkActions([
 
-                BulkAction::make('touch')->action(function (Collection $records) {
+                BulkAction::make('touch')->action(function (Collection $records, Component $livewire) use ($table) {
                     foreach ($records as $record) {
                         $record->touch();
                     }
+                    // $livewire->notify('success', "Records touched for compilation.");
                 })->icon('heroicon-o-cog')->deselectRecordsAfterCompletion(),
 
                 BulkAction::make('delete')
