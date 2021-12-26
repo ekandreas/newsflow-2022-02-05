@@ -4935,16 +4935,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.26.5",
+            "version": "1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "857d8fe465dbc025cbeb2735fe690ff9496f5f98"
+                "reference": "b0c3d13d17ea430e3cf02495192b6ed99f0f7615"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/857d8fe465dbc025cbeb2735fe690ff9496f5f98",
-                "reference": "857d8fe465dbc025cbeb2735fe690ff9496f5f98",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/b0c3d13d17ea430e3cf02495192b6ed99f0f7615",
+                "reference": "b0c3d13d17ea430e3cf02495192b6ed99f0f7615",
                 "shasum": ""
             },
             "require": {
@@ -5001,7 +5001,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.26.5"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.27.0"
             },
             "funding": [
                 {
@@ -5013,7 +5013,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-12-21T13:51:47+00:00"
+            "time": "2021-12-26T19:28:33+00:00"
         },
         {
             "name": "spatie/laravel-tags",

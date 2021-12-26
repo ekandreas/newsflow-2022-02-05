@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Jobs\BookmarkExploreJob;
+use App\Jobs\TagsToLowerCaseJob;
 use App\Models\Bookmark;
 
 class BookmarkObserver
@@ -16,6 +17,7 @@ class BookmarkObserver
     public function created(Bookmark $bookmark)
     {
         dispatch(new BookmarkExploreJob($bookmark));
+        dispatch(new TagsToLowerCaseJob);
     }
 
     /**
@@ -27,6 +29,7 @@ class BookmarkObserver
     public function updated(Bookmark $bookmark)
     {
         dispatch(new BookmarkExploreJob($bookmark));
+        dispatch(new TagsToLowerCaseJob);
     }
 
     /**

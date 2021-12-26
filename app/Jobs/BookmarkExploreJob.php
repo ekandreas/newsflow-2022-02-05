@@ -48,7 +48,7 @@ class BookmarkExploreJob implements ShouldQueue
         $this->bookmark->name = $info->title ?? 'No Name';
         $this->bookmark->description = $info->description ?? null;
         $this->bookmark->image = $info->image ?? null;
-        $this->bookmark->type = $info->providerName ?? null;
+        $this->bookmark->type = 'text';
 
         if($info->keywords) {
             $this->bookmark->syncTags($info->keywords);
@@ -59,8 +59,6 @@ class BookmarkExploreJob implements ShouldQueue
         if($media) {
             $this->bookmark->type = $media->type;
         }
-
-        //ray($info->feeds);
 
         if($info->providerName && $info->providerUrl) {
             $provider = Provider::where('url', $info->providerUrl)->first();
