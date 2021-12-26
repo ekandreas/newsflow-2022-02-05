@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0",
         "embed/embed": "^4.3",
+        "essence/essence": "^3.5",
         "fakerphp/faker": "^1.17",
         "filament/filament": "^2.0",
         "filament/spatie-laravel-tags-plugin": "^2.7",

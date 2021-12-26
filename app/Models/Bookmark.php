@@ -11,4 +11,8 @@ class Bookmark extends Model
     use HasFactory, HasTags;
 
     protected $guarded = [];
+
+    public function provider() {
+        return $this->belongsTo(Provider::class);
+    }
 }

@@ -5,7 +5,9 @@ namespace App\Jobs;
 use App\Crawlers\DomainCrawler;
 use App\Models\Bookmark;
 use App\Models\Domain;
+use App\Models\Provider;
 use Embed\Embed;
+use Essence\Essence;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -52,33 +54,56 @@ class BookmarkExploreJob implements ShouldQueue
             $this->bookmark->syncTags($info->keywords);
         }
 
-        ray($info->feeds);
+        $essence = new Essence();
+        $media = $essence->extract($this->bookmark->url);
+        if($media) {
+            $this->bookmark->type = $media->type;
+        }
+
+        //ray($info->feeds);
+
+        if($info->providerName && $info->providerUrl) {
+            $provider = Provider::where('url', $info->providerUrl)->first();
+            if(!$provider) {
+                $provider = Provider::create([
+                    'name' => $info->providerName,
+                    'url' => $info->providerUrl,
+                ]);
+            }
+            else {
+                $provider->name = $info->providerName;
+                $provider->save();
+            }
+            $provider->syncTags($this->bookmark->tags);
+
+            $this->bookmark->provider_id = $provider->id;
+        }
 
         $this->bookmark->saveQuietly();
 
         return;
 
-        $uri = Uri::createFromString($this->bookmark->url);
-        $host = $uri->getHost();
+        // $uri = Uri::createFromString($this->bookmark->url);
+        // $host = $uri->getHost();
 
-        $data = $og->fetch($host, true);
+        // $data = $og->fetch($host, true);
 
-        ray($data);
+        // ray($data);
 
-        $domain = Domain::where('url', $host)->first();
-        if(!$domain) {
-            $domain = Domain::create([
-                'url' => $host,
-                'name' => $data['title'] ?? 'No Name',
-            ]);
-        }
+        // $domain = Domain::where('url', $host)->first();
+        // if(!$domain) {
+        //     $domain = Domain::create([
+        //         'url' => $host,
+        //         'name' => $data['title'] ?? 'No Name',
+        //     ]);
+        // }
 
-        $domain->update([
-            'name' => $data['title'] ?? 'No Name',
-            'description' => $data['description'] ?? null,
-        ]);
+        // $domain->update([
+        //     'name' => $data['title'] ?? 'No Name',
+        //     'description' => $data['description'] ?? null,
+        // ]);
 
-        $domain->syncTags($this->bookmark->tags);
+        // $domain->syncTags($this->bookmark->tags);
 
         // Crawler::create()
         //     ->setCrawlObserver(new DomainCrawler)

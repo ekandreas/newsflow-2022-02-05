@@ -6,6 +6,7 @@ use App\Filament\Resources\BookmarkResource\Pages;
 use App\Filament\Resources\BookmarkResource\RelationManagers;
 use App\Models\Bookmark;
 use Filament\Forms;
+use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -14,6 +15,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BookmarkResource extends Resource
 {
@@ -29,6 +31,8 @@ class BookmarkResource extends Resource
                 TextInput::make('description'),
                 TextInput::make('url')->required(),
                 SpatieTagsInput::make('tags'),
+                BelongsToSelect::make('provider_id')
+                    ->relationship('provider', 'name')->searchable(),
             ]);
     }
 
