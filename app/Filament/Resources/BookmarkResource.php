@@ -26,7 +26,7 @@ class BookmarkResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('description'),
-                TextInput::make('url'),
+                TextInput::make('url')->required(),
                 SpatieTagsInput::make('tags'),
             ]);
     }
@@ -36,7 +36,9 @@ class BookmarkResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('url'),
+                TextColumn::make('url')->url(function($record) {
+                    return $record->url;
+                })->openUrlInNewTab(),
             ])
             ->filters([
             ]);
