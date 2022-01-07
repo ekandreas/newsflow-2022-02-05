@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ mix('/dist/css/app.css') }}" rel="stylesheet">
     @livewireStyles
+    @stack('header')
 </head>
 
 <body>
@@ -14,6 +15,8 @@
     @yield('content')
 
     @livewireScripts
+    @stack('scripts')
+
 </body>
 
 </html>

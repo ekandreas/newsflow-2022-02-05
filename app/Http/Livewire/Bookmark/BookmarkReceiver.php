@@ -28,8 +28,6 @@ class BookmarkReceiver extends Component
 
         $bookmark->syncTags($receiver->tags);
 
-        $this->redirect($this->url);
-
     }
 
     public function render()
